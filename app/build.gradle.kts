@@ -30,6 +30,15 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/DEPENDENCIES"
+            excludes += "/META-INF/LICENSE*"
+            excludes += "/META-INF/NOTICE*"
+            excludes += "/META-INF/INDEX.LIST"
+        }
+    }
 }
 
 dependencies {
@@ -50,6 +59,8 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
-    // Symja for Math Engine
-    implementation("org.matheclipse:matheclipse-core:3.0.0")
+    // Symja for Math Engine (Excluding colliding pure-Java modules)
+    implementation("org.matheclipse:matheclipse-core:3.0.0") {
+        exclude(group = "org.json", module = "json")
+    }
 }
