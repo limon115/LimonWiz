@@ -22,15 +22,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Generate Gradle Wrapper in Isolation
+    - name: Generate Gradle Wrapper in System Tmp
       run: |
-        mkdir temp-wrapper
-        cd temp-wrapper
+        cd /tmp
         gradle wrapper --gradle-version 8.2 --distribution-type bin
-        cd ..
-        cp temp-wrapper/gradlew .
-        cp -r temp-wrapper/gradle .
-        rm -rf temp-wrapper
+        cd $GITHUB_WORKSPACE
+        cp /tmp/gradlew .
+        cp -r /tmp/gradle .
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
