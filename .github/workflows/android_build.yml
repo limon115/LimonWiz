@@ -22,8 +22,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Generate Authoritative Gradle Wrapper
-      run: gradle wrapper --gradle-version 8.2 --distribution-type bin
+    - name: Generate Gradle Wrapper in Isolation
+      run: |
+        mkdir temp-wrapper
+        cd temp-wrapper
+        gradle wrapper --gradle-version 8.2 --distribution-type bin
+        cd ..
+        cp temp-wrapper/gradlew .
+        cp -r temp-wrapper/gradle .
+        rm -rf temp-wrapper
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
