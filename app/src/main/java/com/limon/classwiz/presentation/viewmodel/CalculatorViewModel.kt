@@ -1,4 +1,4 @@
-// Author: Khalid Hasan Limon 🧠
+// Author: Khalid Hasan Limon
 package com.limon.classwiz.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
@@ -12,6 +12,7 @@ import com.limon.classwiz.domain.engine.SymjaAdapter
 import com.limon.classwiz.domain.model.CursorState
 import com.limon.classwiz.domain.model.MathToken
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -45,10 +46,11 @@ class CalculatorViewModel(
     private val _state = MutableStateFlow(CalcState())
     override val state: StateFlow<CalcState> = _state.asStateFlow()
 
-    override val effect = MutableSharedFlow<CalcEffect>()
+    private val _effect = MutableSharedFlow<CalcEffect>()
+    override val effect: SharedFlow<CalcEffect> = _effect
 
     override fun handleIntent(intent: CalcIntent) {
-        viewModelScope.launch { effect.emit(CalcEffect.TriggerHaptic) }
+        viewModelScope.launch { _effect.emit(CalcEffect.TriggerHaptic) }
         when (intent) {
             is CalcIntent.InputNumber -> insertToken(MathToken.Number(intent.num))
             is CalcIntent.InputOperator -> insertToken(MathToken.Operator(intent.op))

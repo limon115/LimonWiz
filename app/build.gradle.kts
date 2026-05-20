@@ -51,6 +51,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
+    // Navigation Compose Support
+    implementation("androidx.navigation:navigation-compose:2.7.6")
+
     // Koin
     implementation("io.insert-koin:koin-androidx-compose:3.5.3")
 
