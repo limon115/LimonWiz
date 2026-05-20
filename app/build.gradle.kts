@@ -1,4 +1,4 @@
-// Author: Khalid Hasan Limon
+// Author: Khalid Hasan Limon 🚀
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -37,6 +37,7 @@ android {
             excludes += "/META-INF/LICENSE*"
             excludes += "/META-INF/NOTICE*"
             excludes += "/META-INF/INDEX.LIST"
+            excludes += "graphml.xsd"
         }
     }
 }
